@@ -5,10 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+//ask if hashmap is okay; is x^1 supposed to be x
+//implement the equals method public boolean equals(Polynomial other)
+
 public class SimplePolynomial implements Polynomial {
 
   private StringBuilder polynomial;
-  private Map<Integer, Integer> polynomialTerms = new HashMap<>();
+  private List<Integer> polynomialTerms = new ArrayList<>();
 
   public SimplePolynomial() {
     this.polynomial = new StringBuilder("0");
@@ -16,13 +20,7 @@ public class SimplePolynomial implements Polynomial {
 
   @Override
   public Polynomial add(Polynomial other) {
-    Map<Integer, Integer> otherPolynomialTerms = new HashMap<>();
-
-    for(int i = other.getDegree(); i >= 0; i--) {
-      if(other.getCoefficient(i) != 0) {
-        otherPolynomialTerms.put(i, other.getCoefficient(i));
-      }
-    }
+    Map<Integer, Integer> otherPolynomialTerms = getPolynomialTerms(other);
 
     for(int power : this.polynomialTerms.keySet()) {
         int newCoefficient = otherPolynomialTerms.getOrDefault(power, 0)
@@ -39,9 +37,36 @@ public class SimplePolynomial implements Polynomial {
     return this;
   }
 
+  public boolean equals(Object other) {
+    return other.toString().equals(this.toString());
+  }
+
   @Override
   public Polynomial multiply(Polynomial other) {
-    return null;
+    Map<Integer, Integer> otherPolynomialTerms = getPolynomialTerms(other);
+    Map<Integer, Integer> newPolynomialTerms = new HashMap<>();
+
+    for(int thisPower : this.polynomialTerms.keySet()) {
+      int thisCoefficient = this.polynomialTerms.get(thisPower);
+
+      for(int otherPower : otherPolynomialTerms.keySet()) {
+        int otherCoefficient = otherPolynomialTerms.get(otherPower);
+
+        int newCoefficient = thisCoefficient * otherCoefficient;
+        int newPower = thisPower + otherPower;
+
+        if(newPolynomialTerms.containsKey(newPower)) {
+          newCoefficient = newCoefficient + newPolynomialTerms.get(newPower);
+          newPolynomialTerms.put(newPower, newCoefficient);
+        } else {
+          newPolynomialTerms.put(newPower, newCoefficient);
+        }
+      }
+    }
+
+    Polynomial result = new SimplePolynomial();
+    setTerms(newPolynomialTerms);  // Assuming you have a setTerms method in the Polynomial class
+    return result;
   }
 
   @Override
@@ -66,7 +91,7 @@ public class SimplePolynomial implements Polynomial {
     if(power < 0) {
       throw new IllegalArgumentException();
     } else {
-      polynomialTerms.put(power, coefficient);
+      polynomialTerms.add(power, coefficient);
     }
   }
 
@@ -74,8 +99,9 @@ public class SimplePolynomial implements Polynomial {
   public int getDegree() {
     int highestPower = -1;
 
-    for(int power : polynomialTerms.keySet()) {
-      if(power > highestPower) {
+    for(int i = 0; i < polynomialTerms.size(); i++) {
+      int power = polynomialTerms.get(i);
+      if(power[i]power > highestPower) {
         highestPower = power;
       }
     }
@@ -131,26 +157,5 @@ public class SimplePolynomial implements Polynomial {
     }
 
     return this.polynomial.toString();
-  }
-
-  public static void main(String[] args) {
-    SimplePolynomial simplePolynomial = new SimplePolynomial();
-    SimplePolynomial simplePolynomial1 = new SimplePolynomial();
-
-    simplePolynomial.addTerm(3, 4);
-    simplePolynomial.addTerm(-5, 3);
-    simplePolynomial.addTerm(2, 1);
-    simplePolynomial.addTerm(-4, 0);
-
-    simplePolynomial1.addTerm(-5, 2);
-    simplePolynomial1.addTerm(2, 1);
-    simplePolynomial1.addTerm(-4, 0);
-
-//    System.out.println(simplePolynomial.evaluate(2.5));
-//    System.out.println(simplePolynomial.getDegree());
-//    ((((simplePolynomial.derivative()).derivative()).derivative()).derivative()).derivative();
-//    System.out.println(simplePolynomial.toString());
-    simplePolynomial.add(simplePolynomial1);
-    System.out.println(simplePolynomial.toString());
   }
 }
