@@ -1,5 +1,10 @@
 package solution;
 
+/**
+ * Represents a generic chess piece. This interface provides methods to check if a chess piece
+ * can move to a particular position, kill another piece, and retrieve the position and color
+ * of the piece.
+ */
 public interface ChessPiece {
   /**
    * Can this chess piece be moved from its current location to the location

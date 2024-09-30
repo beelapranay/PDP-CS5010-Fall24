@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d3b007bd-9f99-4554-aa8a-eeb553166a19" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Assignments/Assignment-2-Arr/src/polynomial/SimplePolynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Assignments/Assignment-2-Arr/src/polynomial/SimplePolynomial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Lab-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bishop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BishopTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BishopTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChessPiece.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChessPieceGraderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessPieceGraderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Color.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Queen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rook.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/solution/ChessPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/solution/ChessPiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/solution/Piece.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../code.zip" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2mU4w2frtbhM95md77gyDPztyHS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pranaybeela/Documents/NEU/CS5010/Labs/Lab-3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="solution" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3b007bd-9f99-4554-aa8a-eeb553166a19" name="Changes" comment="" />
+      <created>1727118058727</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727118058727</updated>
+      <workItem from="1727118059886" duration="75000" />
+      <workItem from="1727118143008" duration="199000" />
+      <workItem from="1727119355961" duration="3041000" />
+      <workItem from="1727275575062" duration="17552000" />
+      <workItem from="1727310858872" duration="66000" />
+      <workItem from="1727310930912" duration="16000" />
+      <workItem from="1727310949894" duration="12000" />
+      <workItem from="1727310979849" duration="11000" />
+      <workItem from="1727311003384" duration="438000" />
+      <workItem from="1727311687439" duration="12000" />
+      <workItem from="1727311715977" duration="36000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

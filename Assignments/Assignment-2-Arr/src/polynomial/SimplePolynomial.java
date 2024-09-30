@@ -3,7 +3,6 @@ package polynomial;
 import java.util.Arrays;
 import java.util.Objects;
 
-
 /**
  * This class represents a simple polynomial where terms are stored in an array.
  * Each index in the array corresponds to the power of the polynomial, and the value
