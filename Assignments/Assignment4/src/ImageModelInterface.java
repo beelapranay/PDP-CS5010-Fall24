@@ -14,4 +14,6 @@ public interface ImageModelInterface {
   RGB[][] horizontalFlipImage(RGB[][] pixelArray);
 
   RGB[][] verticalFlipImage(RGB[][] pixelArray);
+
+  RGB[][][] splitImageChannels(RGB[][] pixelArray);
 }

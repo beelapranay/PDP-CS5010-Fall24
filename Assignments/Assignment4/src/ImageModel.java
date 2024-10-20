@@ -1,8 +1,5 @@
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class ImageModel implements ImageModelInterface {
   final private double[][] blurKernel = {
@@ -227,6 +224,28 @@ public class ImageModel implements ImageModelInterface {
     return flippedArray;
   }
 
+  @Override
+  public RGB[][][] splitImageChannels(RGB[][] pixelArray) {
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+
+    RGB[][] redChannel = new RGB[height][width];
+    RGB[][] greenChannel = new RGB[height][width];
+    RGB[][] blueChannel = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        RGB pixel = pixelArray[y][x];
+
+        redChannel[y][x] = new RGB(pixel.red, 0, 0);
+        greenChannel[y][x] = new RGB(0, pixel.green, 0);
+        blueChannel[y][x] = new RGB(0, 0, pixel.blue);
+      }
+    }
+
+    return new RGB[][][]{redChannel, greenChannel, blueChannel};
+  }
+
   public static void main(String[] args) {
     ImageControllerInterface controller = new ImageController();
     ImageModelInterface model = new ImageModel();
@@ -234,11 +253,14 @@ public class ImageModel implements ImageModelInterface {
     try {
       RGB[][] pixelArray = controller.loadImage("src/random.jpg");
 
-      RGB[][] flippedArray = model.verticalFlipImage(pixelArray);
+      RGB[][][] channels = model.splitImageChannels(pixelArray);
 
-      BufferedImage flippedImage = controller.arrayToImage(flippedArray);
+      String[] colorNames = {"red", "green", "blue"};
 
-      controller.saveImage(flippedImage, "src/new-image", "jpg");
+      for (int i = 0; i < 3; i++) {
+        controller.saveImage(controller.arrayToImage(channels[i]),
+                "src/" + colorNames[i] + "-image.jpg", "jpg");
+      }
 
     } catch (IOException e) {
       System.out.println("Error loading image: " + e.getMessage());
