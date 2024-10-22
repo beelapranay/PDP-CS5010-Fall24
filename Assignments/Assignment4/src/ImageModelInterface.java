@@ -1,13 +1,14 @@
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public interface ImageModelInterface {
-  RGB[][] applySepiaTone(RGB[][] pixelArray);
+  void applySepiaTone(String imageName, String destinationImageName) throws NoSuchElementException;
 
   RGB[][] convertToGreyscale(RGB[][] pixelArray);
 
-  RGB[][] blurImage(RGB[][] pixelArray);
+  void blurImage(String imageName, String destinationImageName) throws NoSuchElementException;
 
-  RGB[][] sharpenImage(RGB[][] pixelArray);
+  void sharpenImage(String imageName, String destinationImageName) throws NoSuchElementException;
 
   void changeBrightness(String imageName, String destinationImageName, int value) throws NoSuchElementException;
 

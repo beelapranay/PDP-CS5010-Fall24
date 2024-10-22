@@ -1,8 +1,11 @@
-import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class ImageModel implements ImageModelInterface {
-  private final ImageController imageController = new ImageController();
+  private ImageController imageController;
+
+  public ImageModel(ImageController imageController) {
+    this.imageController = imageController;
+  }
 
   final private double[][] blurKernel = {
           {1.0 / 16, 1.0 / 8, 1.0 / 16},
@@ -19,10 +22,21 @@ public class ImageModel implements ImageModelInterface {
   };
 
   @Override
-  public RGB[][] applySepiaTone(RGB[][] pixelArray) {
+  public void applySepiaTone(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+    RGB[][] sepiaArray = new RGB[height][width];
+
     for (int y = 0; y < pixelArray.length; y++) {
       for (int x = 0; x < pixelArray[y].length; x++) {
         RGB pixel = pixelArray[y][x];
+
         int r = pixel.red;
         int g = pixel.green;
         int b = pixel.blue;
@@ -32,10 +46,11 @@ public class ImageModel implements ImageModelInterface {
         int newGreen = (int) Math.min(v, 255);
         int newBlue = (int) Math.min(v, 255);
 
-        pixelArray [y][x] = new RGB(newRed, newGreen, newBlue);
+        sepiaArray[y][x] = new RGB(newRed, newGreen, newBlue);
       }
     }
-    return pixelArray;
+
+    imageController.images.put(destinationImageName, sepiaArray);
   }
 
   @Override
@@ -59,7 +74,13 @@ public class ImageModel implements ImageModelInterface {
   }
 
   @Override
-  public RGB[][] blurImage(RGB[][] pixelArray) {
+  public void blurImage(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
     int width = pixelArray[0].length;
     int height = pixelArray.length;
     RGB[][] blurredArray = new RGB[height][width];
@@ -100,11 +121,17 @@ public class ImageModel implements ImageModelInterface {
       blurredArray[height - 1][x] = pixelArray[height - 1][x];
     }
 
-    return blurredArray;
+    imageController.images.put(destinationImageName, blurredArray);
   }
 
   @Override
-  public RGB[][] sharpenImage(RGB[][] pixelArray) {
+  public void sharpenImage(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
     int width = pixelArray[0].length;
     int height = pixelArray.length;
     RGB[][] sharpenedArray = new RGB[height][width];
@@ -147,12 +174,13 @@ public class ImageModel implements ImageModelInterface {
       sharpenedArray[height - 1][x] = pixelArray[height - 1][x];
     }
 
-    return sharpenedArray;
+    imageController.images.put(destinationImageName, sharpenedArray);
   }
 
   @Override
   public void changeBrightness(String imageName, String destinationImageName, int value) throws NoSuchElementException {
     if (!imageController.images.containsKey(imageName)) {
+      System.out.println("Current images in HashMap: " + imageController.images.keySet());
       throw new NoSuchElementException("Image with name " + imageName + " not found.");
     }
 

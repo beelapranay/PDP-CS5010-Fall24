@@ -3,12 +3,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
 public class ImageController implements ImageControllerInterface {
-  protected HashMap<String, RGB[][]> images;
+  protected HashMap<String, RGB[][]> images = new HashMap<>();
 
   @Override
   public void loadImage(String filePath, String imageName) throws IOException {
@@ -34,6 +35,7 @@ public class ImageController implements ImageControllerInterface {
 
       images.put(imageName, pixelArray);
 
+      System.out.println("Image " + imageName + " loaded. Current images in HashMap: " + images.keySet());
     } catch (IOException e) {
       throw new IOException(e.getMessage());
     }
@@ -109,7 +111,7 @@ public class ImageController implements ImageControllerInterface {
 
   @Override
   public void processCommands(String[] tokens) throws IOException {
-    ImageModel model = new ImageModel();
+    ImageModelInterface model = new ImageModel(this);
 
     switch (tokens[0]) {
       case "load":
@@ -161,10 +163,56 @@ public class ImageController implements ImageControllerInterface {
         model.splitRedChannel(tokens[1], tokens[2]);
         model.splitGreenChannel(tokens[1], tokens[3]);
         model.splitBlueChannel(tokens[1], tokens[4]);
+        break;
+
+      case "rgb-combine":
+        break;
+
+      case "blur":
+        model.blurImage(tokens[1], tokens[2]);
+        break;
+
+      case "sharpen":
+        model.sharpenImage(tokens[1], tokens[2]);
+        break;
+
+      case "sepia":
+        model.applySepiaTone(tokens[1], tokens[2]);
+        break;
+
+      default:
+        System.out.println("Unknown command: " + tokens[0] + "!");
     }
   }
 
   public static void main(String[] args) {
+    ImageController controller = new ImageController();
+    ImageModelInterface model = new ImageModel(controller);
 
+    // Check if there are command-line arguments
+    if (args.length > 0) {
+      // Join the command-line arguments into a single command string
+      StringBuilder command = new StringBuilder();
+      for (String arg : args) {
+        command.append(arg).append(" ");
+      }
+
+      try {
+        controller.commandParser(command.toString().trim());
+      } catch (IOException e) {
+        System.out.println(e.getMessage());
+      }
+    } else {
+      // If no command-line arguments are provided, prompt the user
+      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+      System.out.println("Enter a command or 'run' followed by a file path:");
+
+      try {
+        String command = reader.readLine();
+        controller.commandParser(command);
+      } catch (IOException e) {
+        System.out.println(e.getMessage());
+      }
+    }
   }
 }
