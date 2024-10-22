@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 public class ImageModel implements ImageModelInterface {
-  private ImageController imageController;
+  private final ImageController imageController;
 
   public ImageModel(ImageController imageController) {
     this.imageController = imageController;
@@ -275,7 +275,7 @@ public class ImageModel implements ImageModelInterface {
       for (int x = 0; x < width; x++) {
         RGB pixel = pixelArray[y][x];
 
-        redChannel[y][x] = new RGB(pixel.red, 0, 0);
+        redChannel[y][x] = new RGB(pixel.red, pixel.red, pixel.red);
       }
     }
 
@@ -299,7 +299,7 @@ public class ImageModel implements ImageModelInterface {
       for (int x = 0; x < width; x++) {
         RGB pixel = pixelArray[y][x];
 
-        greenChannel[y][x] = new RGB(0, pixel.green, 0);
+        greenChannel[y][x] = new RGB(pixel.green, pixel.green, pixel.green);
       }
     }
 
@@ -323,7 +323,7 @@ public class ImageModel implements ImageModelInterface {
       for (int x = 0; x < width; x++) {
         RGB pixel = pixelArray[y][x];
 
-        blueChannel[y][x] = new RGB(0, 0, pixel.blue);
+        blueChannel[y][x] = new RGB(pixel.blue, pixel.blue, pixel.blue);
       }
     }
 
@@ -406,24 +406,33 @@ public class ImageModel implements ImageModelInterface {
   }
 
   @Override
-  public RGB[][] combineGreyscale(RGB[][] redPixelArray,
-                                  RGB[][] greenPixelArray,
-                                  RGB[][] bluePixelArray) {
-    int width = redPixelArray[0].length;
-    int height = redPixelArray.length;
+  public void combineGreyscale(String imageName,
+                                  String redImage,
+                                  String greenImage,
+                                  String blueImage) throws NoSuchElementException {
+    try {
+      RGB[][] redPixelArray = imageController.images.get(redImage);
+      RGB[][] greenPixelArray = imageController.images.get(greenImage);
+      RGB[][] bluePixelArray = imageController.images.get(blueImage);
 
-    RGB[][] combinedImage = new RGB[height][width];
+      int width = redPixelArray[0].length;
+      int height = redPixelArray.length;
 
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
-        int red = redPixelArray[y][x].red;
-        int green = greenPixelArray[y][x].green;
-        int blue = bluePixelArray[y][x].blue;
+      RGB[][] combinedImage = new RGB[height][width];
 
-        combinedImage[y][x] = new RGB(red, green, blue);
+      for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+          int red = redPixelArray[y][x].red;
+          int green = greenPixelArray[y][x].green;
+          int blue = bluePixelArray[y][x].blue;
+
+          combinedImage[y][x] = new RGB(red, green, blue);
+        }
       }
-    }
 
-    return combinedImage;
+      imageController.images.put(imageName, combinedImage);
+    } catch (NoSuchElementException e) {
+      System.out.println("Image not found!");
+    }
   }
 }

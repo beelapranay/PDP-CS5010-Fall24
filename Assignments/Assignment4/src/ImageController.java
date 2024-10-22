@@ -166,6 +166,10 @@ public class ImageController implements ImageControllerInterface {
         break;
 
       case "rgb-combine":
+        model.combineGreyscale(tokens[1],
+                tokens[2],
+                tokens[3],
+                tokens[4]);
         break;
 
       case "blur":
@@ -187,11 +191,8 @@ public class ImageController implements ImageControllerInterface {
 
   public static void main(String[] args) {
     ImageController controller = new ImageController();
-    ImageModelInterface model = new ImageModel(controller);
 
-    // Check if there are command-line arguments
     if (args.length > 0) {
-      // Join the command-line arguments into a single command string
       StringBuilder command = new StringBuilder();
       for (String arg : args) {
         command.append(arg).append(" ");
@@ -203,7 +204,6 @@ public class ImageController implements ImageControllerInterface {
         System.out.println(e.getMessage());
       }
     } else {
-      // If no command-line arguments are provided, prompt the user
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       System.out.println("Enter a command or 'run' followed by a file path:");
 

@@ -28,5 +28,8 @@ public interface ImageModelInterface {
 
   void calculateLuma(String imageName, String destinationImageName) throws NoSuchElementException;
 
-  RGB[][] combineGreyscale(RGB[][] redPixelArray, RGB[][] greenPixelArray, RGB[][] bluePixelArray);
+  void combineGreyscale(String imageName,
+                        String redImage,
+                        String greenImage,
+                        String blueImage) throws NoSuchElementException;
 }

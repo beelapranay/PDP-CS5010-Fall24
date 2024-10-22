@@ -28,4 +28,6 @@ rgb-split man man-red man-green man-blue
 #brighten just the red image
 brighten 50 man-red man-red
 
-save src/man-red.jpg man-red
+#combine them back, but by using the brightened red we get a red tint
+rgb-combine man-red-tint man-red man-green man-blue
+save images/man-red-tint.jpg man-red-tint
