@@ -2,9 +2,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public interface ImageControllerInterface {
-  RGB[][] loadImage(String filePath) throws IOException;
+  void loadImage(String filePath, String imageName) throws IOException;
 
   BufferedImage arrayToImage(RGB[][] image);
 
-  void saveImage(BufferedImage image, String filePath, String format) throws IOException;
+  void saveImage(String filePath, String imageName) throws IOException;
+
+  void commandParser(String command) throws IOException;
+
+  void processCommands(String[] tokens) throws IOException;
 }

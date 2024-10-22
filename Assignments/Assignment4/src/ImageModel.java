@@ -1,7 +1,9 @@
-import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 public class ImageModel implements ImageModelInterface {
+  private final ImageController imageController = new ImageController();
+
   final private double[][] blurKernel = {
           {1.0 / 16, 1.0 / 8, 1.0 / 16},
           {1.0 / 8, 1.0 / 4, 1.0 / 8},
@@ -67,8 +69,8 @@ public class ImageModel implements ImageModelInterface {
 
         double red = 0, green = 0, blue = 0;
 
-        for (int ky = 0; ky < 3; ky++) {
-          for (int kx = 0; kx < 3; kx++) {
+        for (int ky = 0; ky < blurredArray[0].length; ky++) {
+          for (int kx = 0; kx < blurredArray.length; kx++) {
             int pixelX = x + kx - 1;
             int pixelY = y + ky - 1;
 
@@ -149,53 +151,49 @@ public class ImageModel implements ImageModelInterface {
   }
 
   @Override
-  public RGB[][] brightenImage(RGB[][] pixelArray, int value) {
+  public void changeBrightness(String imageName, String destinationImageName, int value) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
     int width = pixelArray[0].length;
     int height = pixelArray.length;
 
-    RGB[][] brightenedArray = new RGB[height][width];
+    RGB[][] changedArray = new RGB[height][width];
 
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
-        int newRed = 0;
-        int newGreen = 0;
-        int newBlue = 0;
+        int newRed;
+        int newGreen;
+        int newBlue;
 
-        newRed = Math.min(Math.max(value + pixelArray[y][x].red, 0), 255);
-        newGreen = Math.min(Math.max(value + pixelArray[y][x].green, 0), 255);
-        newBlue = Math.min(Math.max(value + pixelArray[y][x].blue, 0), 255);
+        if (value >= 0) {
+          newRed = Math.min(Math.max(value + pixelArray[y][x].red, 0), 255);
+          newGreen = Math.min(Math.max(value + pixelArray[y][x].green, 0), 255);
+          newBlue = Math.min(Math.max(value + pixelArray[y][x].blue, 0), 255);
+        } else {
+          newRed = Math.min(Math.max(pixelArray[y][x].red - value, 0), 255);
+          newGreen = Math.min(Math.max(pixelArray[y][x].green - value, 0), 255);
+          newBlue = Math.min(Math.max(pixelArray[y][x].blue - value, 0), 255);
+        }
 
-        brightenedArray[y][x] = new RGB(newRed, newGreen, newBlue);
+        changedArray[y][x] = new RGB(newRed, newGreen, newBlue);
       }
     }
-    return brightenedArray;
+
+    imageController.images.put(destinationImageName, changedArray);
   }
 
   @Override
-  public RGB[][] darkenImage(RGB[][] pixelArray, int value) {
-    int width = pixelArray[0].length;
-    int height = pixelArray.length;
-
-    RGB[][] darkenedArray = new RGB[height][width];
-
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
-        int newRed = 0;
-        int newGreen = 0;
-        int newBlue = 0;
-
-        newRed = Math.min(Math.max(pixelArray[y][x].red - value, 0), 255);
-        newGreen = Math.min(Math.max(pixelArray[y][x].green - value, 0), 255);
-        newBlue = Math.min(Math.max(pixelArray[y][x].blue - value, 0), 255);
-
-        darkenedArray[y][x] = new RGB(newRed, newGreen, newBlue);
-      }
+  public void horizontalFlipImage(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
     }
-    return darkenedArray;
-  }
 
-  @Override
-  public RGB[][] horizontalFlipImage(RGB[][] pixelArray) {
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
     int width = pixelArray[0].length;
     int height = pixelArray.length;
 
@@ -206,11 +204,18 @@ public class ImageModel implements ImageModelInterface {
         flippedArray[y][x] = pixelArray[y][width - x - 1];
       }
     }
-    return flippedArray;
+
+    imageController.images.put(destinationImageName, flippedArray);
   }
 
   @Override
-  public RGB[][] verticalFlipImage(RGB[][] pixelArray) {
+  public void verticalFlipImage(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
     int width = pixelArray[0].length;
     int height = pixelArray.length;
 
@@ -221,49 +226,176 @@ public class ImageModel implements ImageModelInterface {
         flippedArray[y][x] = pixelArray[height - y - 1][x];
       }
     }
-    return flippedArray;
+
+    imageController.images.put(destinationImageName, flippedArray);
   }
 
   @Override
-  public RGB[][][] splitImageChannels(RGB[][] pixelArray) {
+  public void splitRedChannel(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
     int width = pixelArray[0].length;
     int height = pixelArray.length;
 
     RGB[][] redChannel = new RGB[height][width];
-    RGB[][] greenChannel = new RGB[height][width];
-    RGB[][] blueChannel = new RGB[height][width];
 
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         RGB pixel = pixelArray[y][x];
 
         redChannel[y][x] = new RGB(pixel.red, 0, 0);
+      }
+    }
+
+    imageController.images.put(destinationImageName, redChannel);
+  }
+
+  @Override
+  public void splitGreenChannel(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+
+    RGB[][] greenChannel = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        RGB pixel = pixelArray[y][x];
+
         greenChannel[y][x] = new RGB(0, pixel.green, 0);
+      }
+    }
+
+    imageController.images.put(destinationImageName, greenChannel);
+  }
+
+  @Override
+  public void splitBlueChannel(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+
+    RGB[][] blueChannel = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        RGB pixel = pixelArray[y][x];
+
         blueChannel[y][x] = new RGB(0, 0, pixel.blue);
       }
     }
 
-    return new RGB[][][]{redChannel, greenChannel, blueChannel};
+    imageController.images.put(destinationImageName, blueChannel);
   }
 
-  public static void main(String[] args) {
-    ImageControllerInterface controller = new ImageController();
-    ImageModelInterface model = new ImageModel();
-
-    try {
-      RGB[][] pixelArray = controller.loadImage("src/random.jpg");
-
-      RGB[][][] channels = model.splitImageChannels(pixelArray);
-
-      String[] colorNames = {"red", "green", "blue"};
-
-      for (int i = 0; i < 3; i++) {
-        controller.saveImage(controller.arrayToImage(channels[i]),
-                "src/" + colorNames[i] + "-image.jpg", "jpg");
-      }
-
-    } catch (IOException e) {
-      System.out.println("Error loading image: " + e.getMessage());
+  public void calculateValue(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
     }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+
+    RGB[][] valueImageArray = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        RGB pixel = pixelArray[y][x];
+
+        int value = Math.max(pixel.red, Math.max(pixel.green, pixel.blue));
+
+        valueImageArray[y][x] = new RGB(value, value, value);
+      }
+    }
+
+    imageController.images.put(destinationImageName, valueImageArray);
+  }
+
+  public void calculateIntensity(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+
+    RGB[][] intensityImageArray = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        RGB pixel = pixelArray[y][x];
+
+        int intensity = (pixel.red + pixel.green + pixel.blue) / 3;
+
+        intensityImageArray[y][x] = new RGB(intensity, intensity, intensity);
+      }
+    }
+
+    imageController.images.put(destinationImageName, intensityImageArray);
+  }
+
+  public void calculateLuma(String imageName, String destinationImageName) throws NoSuchElementException {
+    if (!imageController.images.containsKey(imageName)) {
+      throw new NoSuchElementException("Image with name " + imageName + " not found.");
+    }
+
+    RGB[][] pixelArray = imageController.images.get(imageName);
+
+    int width = pixelArray[0].length;
+    int height = pixelArray.length;
+
+    RGB[][] lumaImageArray = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        RGB pixel = pixelArray[y][x];
+
+        int luma = (int) (0.2126 * pixel.red + 0.7152 * pixel.green + 0.0722 * pixel.blue);
+
+        lumaImageArray[y][x] = new RGB(luma, luma, luma);
+      }
+    }
+
+    imageController.images.put(destinationImageName, lumaImageArray);
+  }
+
+  @Override
+  public RGB[][] combineGreyscale(RGB[][] redPixelArray,
+                                  RGB[][] greenPixelArray,
+                                  RGB[][] bluePixelArray) {
+    int width = redPixelArray[0].length;
+    int height = redPixelArray.length;
+
+    RGB[][] combinedImage = new RGB[height][width];
+
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        int red = redPixelArray[y][x].red;
+        int green = greenPixelArray[y][x].green;
+        int blue = bluePixelArray[y][x].blue;
+
+        combinedImage[y][x] = new RGB(red, green, blue);
+      }
+    }
+
+    return combinedImage;
   }
 }

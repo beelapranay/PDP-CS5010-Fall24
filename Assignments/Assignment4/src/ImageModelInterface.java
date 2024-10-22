@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public interface ImageModelInterface {
   RGB[][] applySepiaTone(RGB[][] pixelArray);
 
@@ -7,13 +9,23 @@ public interface ImageModelInterface {
 
   RGB[][] sharpenImage(RGB[][] pixelArray);
 
-  RGB[][] brightenImage(RGB[][] pixelArray, int value);
+  void changeBrightness(String imageName, String destinationImageName, int value) throws NoSuchElementException;
 
-  RGB[][] darkenImage(RGB[][] pixelArray, int value);
+  void horizontalFlipImage(String imageName, String destinationImageName) throws NoSuchElementException;
 
-  RGB[][] horizontalFlipImage(RGB[][] pixelArray);
+  void verticalFlipImage(String imageName, String destinationImageName) throws NoSuchElementException;
 
-  RGB[][] verticalFlipImage(RGB[][] pixelArray);
+  void splitRedChannel(String imageName, String destinationImageName) throws NoSuchElementException;
 
-  RGB[][][] splitImageChannels(RGB[][] pixelArray);
+  void splitGreenChannel(String imageName, String destinationImageName) throws NoSuchElementException;
+
+  void splitBlueChannel(String imageName, String destinationImageName) throws NoSuchElementException;
+
+  void calculateValue(String imageName, String destinationImageName) throws NoSuchElementException;
+
+  void calculateIntensity(String imageName, String destinationImageName) throws NoSuchElementException;
+
+  void calculateLuma(String imageName, String destinationImageName) throws NoSuchElementException;
+
+  RGB[][] combineGreyscale(RGB[][] redPixelArray, RGB[][] greenPixelArray, RGB[][] bluePixelArray);
 }
