@@ -1,5 +1,6 @@
 #load koala.ppm and call it 'koala'
-load src/man.png man
+load images/earth.jpg man
+
 
 #brighten koala by adding 10  
 brighten 10 man man-brighter 
@@ -20,14 +21,10 @@ save src/man-brighter.jpg man-brighter
 save src/man-gs.jpg man-greyscale
 
 #overwrite koala with another file
-load src/random.jpg man
+load images/square.png man
 
 #give the koala a red tint
 rgb-split man man-red man-green man-blue
 
 #brighten just the red image
 brighten 50 man-red man-red
-
-#combine them back, but by using the brightened red we get a red tint
-rgb-combine man-red-tint man-red man-green man-blue
-save images/man-red-tint.jpg man-red-tint
