@@ -1,2 +1,0 @@
-load images/earth.jpg earth
-save src/earth.ppm earth

@@ -3,7 +3,6 @@ package controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import model.ImageModel;
 import model.ImageModelInterface;
@@ -14,6 +13,21 @@ import model.RGB;
  */
 public class ImageController implements ImageControllerInterface {
   protected HashMap<String, RGB[][]> images = new HashMap<>();
+
+  /**
+   * Loads the image from the specified file path and associates it with a name.
+   *
+   * @param filePath the path of the image file
+   * @param imageName the name to assign to the loaded image
+   * @throws IOException if an error occurs during loading
+   */
+  @Override
+  public void loadImage(String filePath, String imageName) throws IOException {
+    ImageLoaderAndSaver imageLoader = ImageLoaderFactory
+            .getImageLoader(filePath, this);
+    RGB[][] pixelArray = imageLoader.loadImage(filePath, imageName);
+    images.put(imageName, pixelArray);
+  }
 
   /**
    * Saves the image to the specified file path.
@@ -36,21 +50,6 @@ public class ImageController implements ImageControllerInterface {
    */
   public HashMap<String, RGB[][]> getImages() {
     return this.images;
-  }
-
-  /**
-   * Loads the image from the specified file path and associates it with a name.
-   *
-   * @param filePath the path of the image file
-   * @param imageName the name to assign to the loaded image
-   * @throws IOException if an error occurs during loading
-   */
-  @Override
-  public void loadImage(String filePath, String imageName) throws IOException {
-    ImageLoaderAndSaver imageLoader = ImageLoaderFactory
-            .getImageLoader(filePath, this);
-    RGB[][] pixelArray = imageLoader.loadImage(filePath, imageName);
-    images.put(imageName, pixelArray);
   }
 
   /**
@@ -148,25 +147,6 @@ public class ImageController implements ImageControllerInterface {
         break;
       default:
         System.out.println("Unknown command: " + tokens[0] + "!");
-    }
-  }
-
-  /**
-   * Main method that accepts user input to run commands.
-   *
-   * @param args the program arguments
-   */
-  public static void main(String[] args) {
-    ImageController controller = new ImageController();
-
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("Enter a command or 'run' followed by a file path:");
-
-    try {
-      String command = reader.readLine();
-      controller.commandParser(command);
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
     }
   }
 }

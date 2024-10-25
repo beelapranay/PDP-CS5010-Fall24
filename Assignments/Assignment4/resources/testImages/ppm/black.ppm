@@ -1,0 +1,6 @@
+P3
+# A small 2x2 PPM image with all black pixels
+2 2
+0
+0 0 0   0 0 0
+0 0 0   0 0 0

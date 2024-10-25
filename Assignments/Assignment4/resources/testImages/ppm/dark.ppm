@@ -1,0 +1,6 @@
+P3
+# A small 2x2 PPM image with dark pixels
+2 2
+255
+10 10 10   20 20 20
+30 30 30   40 40 40

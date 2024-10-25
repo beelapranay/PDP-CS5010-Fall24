@@ -58,6 +58,8 @@ public class PPMImageLoaderAndSaver extends ImageLoaderAndSaver {
     int width = sc.nextInt();
     int height = sc.nextInt();
 
+    sc.nextInt();
+
     RGB[][] pixelArray = new RGB[height][width];
 
     for (int i = 0; i < height; i++) {

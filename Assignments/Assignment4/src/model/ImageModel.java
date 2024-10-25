@@ -3,12 +3,14 @@ package model;
 import java.util.NoSuchElementException;
 
 import controller.ImageController;
+import controller.ImageControllerInterface;
 
 /**
- * ImageModel class implements image processing operations like sepia tone, blur, sharpen, and brightness adjustment.
+ * ImageModel class implements image processing operations like sepia tone,
+ * blur, sharpen, and brightness adjustment.
  */
 public class ImageModel implements ImageModelInterface {
-  private final ImageController imageController;
+  private final ImageControllerInterface imageController;
 
   /**
    * Constructor that initializes the image controller.
@@ -19,13 +21,13 @@ public class ImageModel implements ImageModelInterface {
     this.imageController = imageController;
   }
 
-  final private double[][] blurKernel = {
+  private final double[][] blurKernel = {
           {1.0 / 16, 1.0 / 8, 1.0 / 16},
           {1.0 / 8, 1.0 / 4, 1.0 / 8},
           {1.0 / 16, 1.0 / 8, 1.0 / 16}
   };
 
-  final private double[][] sharpenKernel = {
+  private final double[][] sharpenKernel = {
           {-1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8},
           {-1.0 / 8, 1.0 / 4, 1.0 / 4, 1.0 / 4, -1.0 / 8},
           {-1.0 / 8, 1.0 / 4, 1.0, 1.0 / 4, -1.0 / 8},
@@ -94,7 +96,9 @@ public class ImageModel implements ImageModelInterface {
     for (int y = 1; y < height - 1; y++) {
       for (int x = 1; x < width - 1; x++) {
 
-        double red = 0, green = 0, blue = 0;
+        double red = 0;
+        double green = 0;
+        double blue = 0;
 
         for (int ky = 0; ky < 3; ky++) {
           for (int kx = 0; kx < 3; kx++) {
@@ -313,7 +317,8 @@ public class ImageModel implements ImageModelInterface {
   }
 
   /**
-   * Splits the green channel from the image and creates a greyscale image with green channel values.
+   * Splits the green channel from the image and creates a
+   * greyscale image with green channel values.
    *
    * @param imageName            the name of the image to process
    * @param destinationImageName the name to save the processed image
@@ -373,7 +378,8 @@ public class ImageModel implements ImageModelInterface {
   }
 
   /**
-   * Calculates the value of each pixel by taking the maximum of the red, green, and blue components and creates a greyscale image.
+   * Calculates the value of each pixel by taking the maximum of the red, green,
+   * and blue components and creates a greyscale image.
    *
    * @param imageName            the name of the image to process
    * @param destinationImageName the name to save the processed image
@@ -404,7 +410,8 @@ public class ImageModel implements ImageModelInterface {
   }
 
   /**
-   * Calculates the intensity of each pixel by averaging the red, green, and blue components and creates a greyscale image.
+   * Calculates the intensity of each pixel by averaging the red, green,
+   * and blue components and creates a greyscale image.
    *
    * @param imageName            the name of the image to process
    * @param destinationImageName the name to save the processed image
@@ -435,7 +442,8 @@ public class ImageModel implements ImageModelInterface {
   }
 
   /**
-   * Calculates the luma of each pixel using the weighted sum of the red, green, and blue components and creates a greyscale image.
+   * Calculates the luma of each pixel using the weighted sum of the
+   * red, green, and blue components and creates a greyscale image.
    *
    * @param imageName            the name of the image to process
    * @param destinationImageName the name to save the processed image
@@ -457,7 +465,8 @@ public class ImageModel implements ImageModelInterface {
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         RGB pixel = pixelArray[y][x];
-        int luma = (int) (0.2126 * pixel.red + 0.7152 * pixel.green + 0.0722 * pixel.blue);
+        int luma = (int) Math.round(0.2126 * pixel.red
+                + 0.7152 * pixel.green + 0.0722 * pixel.blue);
         lumaImageArray[y][x] = new RGB(luma, luma, luma);
       }
     }
@@ -466,7 +475,8 @@ public class ImageModel implements ImageModelInterface {
   }
 
   /**
-   * Combines the red, green, and blue channels from three greyscale images to create a single RGB image.
+   * Combines the red, green, and blue channels from
+   * three greyscale images to create a single RGB image.
    *
    * @param imageName  the name of the combined image
    * @param redImage   the greyscale image for the red channel

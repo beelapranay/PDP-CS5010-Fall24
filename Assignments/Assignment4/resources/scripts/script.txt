@@ -1,0 +1,29 @@
+#load koala.ppm and call it 'koala'
+load resources/testImages/jpg/earth.jpg man
+
+#brighten koala by adding 10  
+brighten 10 man man-brighter 
+
+#flip koala vertically
+vertical-flip man man-vertical
+
+#flip the vertically flipped koala horizontally
+horizontal-flip man-vertical man-vertical-horizontal
+
+#create a greyscale using only the value component, as an image koala-greyscale
+value-component man man-greyscale
+
+#save koala-brighter
+save resources/res/jpgRes/man-brighter.jpg man-brighter
+
+#save koala-greyscale
+save resources/res/jpgRes/man-gs.jpg man-greyscale
+
+#overwrite koala with another file
+load resources/testImages/png/square.png man
+
+#give the koala a red tint
+rgb-split man man-red man-green man-blue
+
+#brighten just the red image
+brighten 50 man-red man-red

@@ -11,8 +11,7 @@ public class ImageLoaderFactory {
    *
    * @param filePath        the path of the image file
    * @param imageController the image controller to be used by the loader and saver
-   * @return an instance of ImageLoaderAndSaver that can handle the
-   * specified file type
+   * @return an instance of ImageLoaderAndSaver that can handle the specified file type
    * @throws UnsupportedOperationException if the file type is unsupported
    */
   public static ImageLoaderAndSaver getImageLoader(
