@@ -7,6 +7,8 @@ import java.util.HashMap;
 import model.ImageModel;
 import model.ImageModelInterface;
 import model.RGB;
+import view.ImageView;
+import view.ImageViewInterface;
 
 /**
  * ImageController handles loading, saving, and processing image commands.
@@ -91,60 +93,136 @@ public class ImageController implements ImageControllerInterface {
    */
   @Override
   public void processCommands(String[] tokens) throws IOException {
-    ImageModelInterface model = new ImageModel(this);
+    ImageViewInterface view = new ImageView(this);
+    ImageModelInterface model = new ImageModel(this, view);
 
     switch (tokens[0]) {
       case "load":
-        loadImage(tokens[1], tokens[2]);
+        if (tokens.length < 3) {
+          System.out.println("Error: 'load' requires a file path and image name.");
+        } else {
+          loadImage(tokens[1], tokens[2]);
+        }
         break;
       case "save":
-        saveImage(tokens[1], tokens[2]);
+        if (tokens.length < 3) {
+          System.out.println("Error: 'save' requires a file path and image name.");
+        } else {
+          saveImage(tokens[1], tokens[2]);
+        }
         break;
       case "red-component":
-        model.splitRedChannel(tokens[1], tokens[2]);
-        break;
       case "green-component":
-        model.splitGreenChannel(tokens[1], tokens[2]);
-        break;
       case "blue-component":
-        model.splitBlueChannel(tokens[1], tokens[2]);
-        break;
       case "value-component":
-        model.calculateValue(tokens[1], tokens[2]);
-        break;
       case "luma-component":
-        model.calculateLuma(tokens[1], tokens[2]);
-        break;
       case "intensity-component":
-        model.calculateIntensity(tokens[1], tokens[2]);
+        if (tokens.length == 3) {
+          model.applyGreyscaleTransformation(tokens[1], tokens[2], tokens[0], 100);
+        } else if (tokens.length == 5 && tokens[3].equals("split")) {
+          int splitPercentage = Integer.parseInt(tokens[4]);
+          model.applyGreyscaleTransformation(tokens[1], tokens[2], tokens[0], splitPercentage);
+        } else {
+          System.out.println("Error: Invalid arguments for " + tokens[0]);
+        }
         break;
       case "horizontal-flip":
-        model.horizontalFlipImage(tokens[1], tokens[2]);
-        break;
       case "vertical-flip":
-        model.verticalFlipImage(tokens[1], tokens[2]);
+        if (tokens.length < 3) {
+          System.out.println("Error: '" + tokens[0]
+                  + "' requires source and destination image names.");
+        } else {
+          model.flipImage(tokens[1], tokens[2], tokens[0]);
+        }
         break;
       case "brighten":
-        int value = Integer.parseInt(tokens[1]);
-        model.changeBrightness(tokens[2], tokens[3], value);
+        if (tokens.length < 4) {
+          System.out.println("Error: 'brighten' requires a brightness " +
+                  "value, source, and destination image names.");
+        } else {
+          int value = Integer.parseInt(tokens[1]);
+          model.changeBrightness(tokens[2], tokens[3], value);
+        }
         break;
       case "rgb-split":
-        model.splitRedChannel(tokens[1], tokens[2]);
-        model.splitGreenChannel(tokens[1], tokens[3]);
-        model.splitBlueChannel(tokens[1], tokens[4]);
+        if (tokens.length < 5) {
+          System.out.println("Error: 'rgb-split' requires three destination image names.");
+        } else {
+          model.applyGreyscaleTransformation(tokens[1],
+                  tokens[2], "red-component", 100);
+          model.applyGreyscaleTransformation(tokens[1],
+                  tokens[3], "green-component", 100);
+          model.applyGreyscaleTransformation(tokens[1],
+                  tokens[4], "blue-component", 100);
+        }
         break;
       case "rgb-combine":
-        model.combineGreyscale(tokens[1], tokens[2], tokens[3], tokens[4]);
+        if (tokens.length < 5) {
+          System.out.println("Error: 'rgb-combine' requires " +
+                  "three source and one destination image names.");
+        } else {
+          model.combineGreyscale(tokens[1], tokens[2], tokens[3], tokens[4]);
+        }
         break;
       case "blur":
-        model.blurImage(tokens[1], tokens[2]);
-        break;
       case "sharpen":
-        model.sharpenImage(tokens[1], tokens[2]);
+        if (tokens.length == 3) {
+          model.blurOrSharpen(tokens[1], tokens[2], 100, tokens[0]);
+        } else if (tokens.length == 5 && tokens[3].equals("split")) {
+          int splitPercentage = Integer.parseInt(tokens[4]);
+          model.blurOrSharpen(tokens[1], tokens[2], splitPercentage, tokens[0]);
+        } else {
+          System.out.println("Error: Invalid arguments for " + tokens[0]);
+        }
         break;
       case "sepia":
-        model.applySepiaTone(tokens[1], tokens[2]);
+        if (tokens.length == 3) {
+          model.applySepiaTone(tokens[1], tokens[2], 100);
+        } else if (tokens.length == 5 && tokens[3].equals("split")) {
+          int splitPercentage = Integer.parseInt(tokens[4]);
+          model.applySepiaTone(tokens[1], tokens[2], splitPercentage);
+        } else {
+          System.out.println("Error: Invalid arguments for sepia.");
+        }
         break;
+      case "compress":
+        if (tokens.length < 4) {
+          System.out.println("Error: 'compress' requires a " +
+                  "compression percentage, source, and destination image names.");
+        } else {
+          model.compressImage(tokens[1], tokens[2], tokens[3]);
+        }
+        break;
+      case "histogram":
+        view.generateAndStoreHistogram(tokens[1], tokens[2]);
+        break;
+      case "color-correct":
+        if (tokens.length == 3) {
+          model.colorCorrect(tokens[1], tokens[2], 100);
+        } else if (tokens.length == 5 && tokens[3].equals("split")) {
+          int splitPercentage = Integer.parseInt(tokens[4]);
+          model.colorCorrect(tokens[1], tokens[2], splitPercentage);
+        } else {
+          System.out.println("Error: Invalid arguments for color-correct.");
+        }
+        break;
+      case "levels-adjust":
+        if (tokens.length == 6) {
+          int b = Integer.parseInt(tokens[1]);
+          int m = Integer.parseInt(tokens[2]);
+          int w = Integer.parseInt(tokens[3]);
+          model.levelsAdjust(tokens[4], tokens[5], b, m, w, 100);
+        } else if (tokens.length == 8 && tokens[6].equals("split")) {
+          int b = Integer.parseInt(tokens[1]);
+          int m = Integer.parseInt(tokens[2]);
+          int w = Integer.parseInt(tokens[3]);
+          int splitPercentage = Integer.parseInt(tokens[7]);
+          model.levelsAdjust(tokens[4], tokens[5], b, m, w, splitPercentage);
+        } else {
+          System.out.println("Error: Invalid arguments for levels-adjust.");
+        }
+        break;
+
       default:
         System.out.println("Unknown command: " + tokens[0] + "!");
     }

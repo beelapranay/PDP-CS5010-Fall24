@@ -9,31 +9,41 @@ import java.util.NoSuchElementException;
 public interface ImageModelInterface {
 
   /**
-   * Applies a sepia tone effect to the specified image.
+   * Applies sepia tone effect to an image within a specified split percentage.
    *
-   * @param imageName            the name of the image to apply the effect to
-   * @param destinationImageName the name of the destination image to save the result
+   * @param imageName            the name of the image to process
+   * @param destinationImageName the name to save the processed image
+   * @param splitPercentage      the percentage of the image width to apply sepia tone
    * @throws NoSuchElementException if the image is not found
    */
-  void applySepiaTone(String imageName, String destinationImageName) throws NoSuchElementException;
+  void applySepiaTone(String imageName, String destinationImageName, int splitPercentage)
+          throws NoSuchElementException;
 
   /**
-   * Applies a blur effect to the specified image.
+   * Applies blur or sharpen effect to an image within a specified split percentage.
    *
-   * @param imageName            the name of the image to blur
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
+   * @param imageName            the name of the image to process
+   * @param destinationImageName the name to save the processed image
+   * @param splitPercentage      the percentage of the image width to apply transformation
+   * @param operationName        the operation name, either "blur" or "sharpen"
+   * @throws NoSuchElementException if the image is not found or operation is invalid
    */
-  void blurImage(String imageName, String destinationImageName) throws NoSuchElementException;
+  void blurOrSharpen(String imageName, String destinationImageName,
+                     int splitPercentage, String operationName) throws NoSuchElementException;
 
   /**
-   * Applies a sharpen effect to the specified image.
+   * Applies grayscale transformation based on specified component to a portion of the image.
    *
-   * @param imageName            the name of the image to sharpen
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
+   * @param imageName            the name of the image to process
+   * @param destinationImageName the name to save the processed image
+   * @param transformationType   the type of grayscale transformation
+   *                             (e.g., "red-component", "luma-component")
+   * @param splitPercentage      the percentage of the image width to apply transformation
+   * @throws NoSuchElementException if the image is not found or transformation type is invalid
    */
-  void sharpenImage(String imageName, String destinationImageName) throws NoSuchElementException;
+  void applyGreyscaleTransformation(String imageName, String destinationImageName,
+                           String transformationType, int splitPercentage)
+          throws NoSuchElementException;
 
   /**
    * Changes the brightness of the specified image by the given value.
@@ -43,85 +53,43 @@ public interface ImageModelInterface {
    * @param value                the value to adjust the brightness
    * @throws NoSuchElementException if the image is not found
    */
-  void changeBrightness(String imageName, String destinationImageName, int value)
+  void changeBrightness(String imageName, String destinationImageName,
+                        int value)
           throws NoSuchElementException;
 
   /**
-   * Flips the specified image horizontally.
+   * Color corrects an image to match target peaks based on histogram data.
+   *
+   * @param imageName            the name of the image to correct
+   * @param destinationImageName the name to save the corrected image
+   * @param splitPercentage      the percentage of the image width to apply color correction
+   */
+  void colorCorrect(String imageName, String destinationImageName, int splitPercentage);
+
+  /**
+   * Adjusts levels of the image based on specified points b, m, and w using a quadratic function.
+   *
+   * @param imageName       the name of the image to adjust
+   * @param destImageName   the name to save the adjusted image
+   * @param b               the black point for levels adjustment
+   * @param m               the mid-tone point for levels adjustment
+   * @param w               the white point for levels adjustment
+   * @param splitPercentage the percentage of the image width to apply adjustment
+   */
+  void levelsAdjust(String imageName, String destImageName, int b, int m, int w,
+                           int splitPercentage);
+
+  /**
+   * Flips the image horizontally or vertically.
    *
    * @param imageName            the name of the image to flip
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
+   * @param destinationImageName the name to save the flipped image
+   * @param operationName        the type of flip operation, either
+   *                             "horizontal-flip" or "vertical-flip"
+   * @throws NoSuchElementException if the image is not found or operation is invalid
    */
-  void horizontalFlipImage(String imageName, String destinationImageName)
+  void flipImage(String imageName, String destinationImageName, String operationName)
           throws NoSuchElementException;
-
-  /**
-   * Flips the specified image vertically.
-   *
-   * @param imageName            the name of the image to flip
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void verticalFlipImage(String imageName, String destinationImageName)
-          throws NoSuchElementException;
-
-  /**
-   * Extracts the red channel from the specified image.
-   *
-   * @param imageName            the name of the image to process
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void splitRedChannel(String imageName, String destinationImageName) throws NoSuchElementException;
-
-  /**
-   * Extracts the green channel from the specified image.
-   *
-   * @param imageName            the name of the image to process
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void splitGreenChannel(String imageName, String destinationImageName)
-          throws NoSuchElementException;
-
-  /**
-   * Extracts the blue channel from the specified image.
-   *
-   * @param imageName            the name of the image to process
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void splitBlueChannel(String imageName, String destinationImageName)
-          throws NoSuchElementException;
-
-  /**
-   * Calculates the value (max of RGB components) for the specified image.
-   *
-   * @param imageName            the name of the image to process
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void calculateValue(String imageName, String destinationImageName) throws NoSuchElementException;
-
-  /**
-   * Calculates the intensity (average of RGB components) for the specified image.
-   *
-   * @param imageName            the name of the image to process
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void calculateIntensity(String imageName, String destinationImageName)
-          throws NoSuchElementException;
-
-  /**
-   * Calculates the luma (weighted average of RGB components) for the specified image.
-   *
-   * @param imageName            the name of the image to process
-   * @param destinationImageName the name of the destination image to save the result
-   * @throws NoSuchElementException if the image is not found
-   */
-  void calculateLuma(String imageName, String destinationImageName) throws NoSuchElementException;
 
   /**
    * Combines greyscale images into a single image using the red, green, and blue components.
@@ -133,5 +101,15 @@ public interface ImageModelInterface {
    * @throws NoSuchElementException if any of the images are not found
    */
   void combineGreyscale(String imageName, String redImage, String greenImage, String blueImage)
+          throws NoSuchElementException;
+
+  /**
+   * Compresses an image using the specified compression percentage.
+   *
+   * @param compressionPercentage the percentage of compression to apply
+   * @param imageName             the name of the image to compress
+   * @param destinationImageName  the name to save the compressed image
+   */
+  void compressImage(String compressionPercentage, String imageName, String destinationImageName)
           throws NoSuchElementException;
 }

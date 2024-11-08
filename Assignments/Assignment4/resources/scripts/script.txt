@@ -1,29 +1,59 @@
-#load koala.ppm and call it 'koala'
-load resources/testImages/jpg/earth.jpg man
+#load an image
+load resources/testImages/jpg/unnamed.jpg earth
 
-#brighten koala by adding 10  
-brighten 10 man man-brighter 
+#save an image
+save resources/res/jpgRes/earth.jpg earth
 
-#flip koala vertically
-vertical-flip man man-vertical
+#apply red component to the image with (or) without percentage
+red-component earth earthRed 50
 
-#flip the vertically flipped koala horizontally
-horizontal-flip man-vertical man-vertical-horizontal
+#apply green component to the image with (or) without percentage
+green-component earth earthGreen 50
 
-#create a greyscale using only the value component, as an image koala-greyscale
-value-component man man-greyscale
+#apply blue component to the image with (or) without percentage
+blue-component earth earthBlue 50
 
-#save koala-brighter
-save resources/res/jpgRes/man-brighter.jpg man-brighter
+#calculate value component of the image with (or) without percentage
+value-component earth earthValue 50
 
-#save koala-greyscale
-save resources/res/jpgRes/man-gs.jpg man-greyscale
+#calculate luma component of the image with (or) without percentage
+luma-component earth earthLuma 50
 
-#overwrite koala with another file
-load resources/testImages/png/square.png man
+#calculate intensity component of the image with (or) without percentage
+intensity-component earth earthIntensity 50
 
-#give the koala a red tint
-rgb-split man man-red man-green man-blue
+#flip image horizontally
+horizontal-flip earth earth-h
 
-#brighten just the red image
-brighten 50 man-red man-red
+#flip image vertically
+vertical-flip earth earth-v
+
+#brighten the image
+brighten 100 earthRed earthRedBrightened
+
+#split image into RGB channels
+rgb-split earth red-earth green-earth blue-earth
+
+#combine RGB channels into an image
+rgb-combine earth-combine red-earth green-earth blue-earth
+
+#blur the image with (or) without percentage
+blur earth earthBlur 50
+
+#sharpen the image with (or) without percentage
+sharpen earth earthSharpen 50
+
+#compress the image
+compress 95 earth earthCompressed
+
+#apply sepia tone to the image with (or) without percentage
+sepia earth earthSepia 50
+
+#generate and store histogram of the image
+histogram earth earthHistogram
+
+#apply color correction to the image with (or) without percentage
+color-correct earth earthColorCorrected 50
+
+#adjust levels of the image with (or) without percentage
+levels-adjust 20 128 235 earth earthLevelsAdjusted 50

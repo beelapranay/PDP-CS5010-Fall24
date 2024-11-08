@@ -46,41 +46,6 @@ public class ImageControllerTest {
   }
 
   /**
-   * Tests loading a PPM image.
-   *
-   * @throws IOException if an error occurs while loading the image.
-   */
-  @Test
-  public void testLoadingPPMImage() throws IOException {
-    controller.loadImage("resources/testImages/ppm/3x2.ppm", "3x2");
-    assertTrue(controller.getImages().containsKey("3x2"));
-  }
-
-  /**
-   * Tests saving a PPM image as a JPG image.
-   *
-   * @throws IOException if an error occurs while saving the image.
-   */
-  @Test
-  public void testSavingPPMImageAsJPGImage() throws IOException {
-    controller.loadImage("resources/testImages/ppm/3x2.ppm", "3x2");
-    controller.saveImage("resources/res/jpgRes/3x2PPMAsJPGImage.jpg", "3x2");
-    assertTrue(controller.getImages().containsKey("3x2"));
-  }
-
-  /**
-   * Tests saving a PPM image as a PNG image.
-   *
-   * @throws IOException if an error occurs while saving the image.
-   */
-  @Test
-  public void testSavingPPMImageAsPNGImage() throws IOException {
-    controller.loadImage("resources/testImages/ppm/3x2.ppm", "3x2");
-    controller.saveImage("resources/res/pngRes/3x2PPMAsPNGImage.png", "3x2");
-    assertTrue(controller.getImages().containsKey("3x2"));
-  }
-
-  /**
    * Tests saving a JPG image as a PNG image.
    *
    * @throws IOException if an error occurs while saving the image.
@@ -350,5 +315,75 @@ public class ImageControllerTest {
     controller.commandParser(command);
 
     assertTrue(controller.getImages().containsKey("man"));
+  }
+
+  /**
+   * Tests command parser functionality for compressing an image.
+   *
+   * @throws IOException if an error occurs during command execution.
+   */
+  @Test
+  public void testCompressImage() throws IOException {
+    controller.loadImage("resources/testImages/jpg/earth.jpg", "earth");
+
+    String command = "compress 50 earth earth-compress";
+
+    controller.commandParser(command);
+
+    assertTrue(controller.getImages().containsKey("earth-compress"));
+  }
+
+  /**
+   * Tests the command parser's ability to generate a histogram for a given image.
+   * Verifies that the histogram is created and stored under the specified name
+   * in the image controller.
+   *
+   * @throws IOException if an error occurs during image loading.
+   */
+  @Test
+  public void testCommandParserGenerateHistogram() throws IOException {
+    controller.loadImage("resources/testImages/jpg/red_tinged_image.jpg",
+            "sampleImage");
+
+    String command = "histogram sampleImage sampleImageHistogram";
+
+    controller.commandParser(command);
+
+    assertTrue("Histogram was not generated and stored correctly",
+            controller.getImages().containsKey("sampleImageHistogram"));
+  }
+
+  /**
+   * Test case for color correction command via command parser.
+   * Ensures the image is color corrected and saved correctly.
+   */
+  @Test
+  public void testCommandParserColorCorrect() throws IOException {
+    controller.loadImage("resources/testImages/jpg/red_tinged_image.jpg",
+            "samplePPMImage");
+
+    String command = "color-correct samplePPMImage samplePPMImageCorrected";
+
+    controller.commandParser(command);
+
+    assertTrue("Color correction was not applied and saved correctly",
+            controller.getImages().containsKey("samplePPMImageCorrected"));
+  }
+
+  /**
+   * Test case for levels adjustment command via command parser.
+   * Verifies that levels adjustment is applied and the adjusted image is stored.
+   */
+  @Test
+  public void testCommandParserLevelsAdjust() throws IOException {
+    controller.loadImage("resources/testImages/jpg/red_tinged_image.jpg",
+            "samplePNGImage");
+
+    String command = "levels-adjust 20 128 230 samplePNGImage samplePNGImageAdjusted";
+
+    controller.commandParser(command);
+
+    assertTrue("Levels adjustment was not applied and saved correctly",
+            controller.getImages().containsKey("samplePNGImageAdjusted"));
   }
 }

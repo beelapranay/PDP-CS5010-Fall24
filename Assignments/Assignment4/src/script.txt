@@ -1,0 +1,20 @@
+load resources/testImages/jpg/unnamed.jpg earth
+save resources/res/jpgRes/earth.jpg earth
+red-component earth earthRed 50
+green-component earth earthGreen 50
+blue-component earth earthBlue 50
+value-component earth earthValue 50
+luma-component earth earthLuma 50
+intensity-component earth earthIntensity 50
+horizontal-flip earth earth-h
+vertical-flip earth earth-v
+brighten 100 earthRed earthRedBrightened
+rgb-split earth red-earth green-earth blue-earth
+rgb-combine earth-combine red-earth green-earth blue-earth
+blur earth earthBlur 50
+sharpen earth earthSharpen 50
+compress 95 earth earthCompressed
+sepia earth earthSepia 50
+histogram earth earthHistogram
+color-correct earth earthColorCorrected 50
+levels-adjust 20 128 235 earth earthLevelsAdjusted 50

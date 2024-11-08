@@ -1,0 +1,86 @@
+HOW TO RUN YOUR SCRIPT ON OUR PROGRAM:
+	Step 1: Locate the class name "Main" in the source folder
+	Step 2: Run the main class.
+	Step 3: Enter your commands one after the other adhering to the instructions on your console or enter 'run' followed by a file path to run your src file.
+
+
+COMMANDS:
+  # load an image
+  load image-destination image-name
+  eg: load src/testImages/png/red_tinged_image.png redTingedOriginal
+
+  # save an image
+  save image-destination image-name
+  eg: save src/testImages/png/red_tinged_green.png redTingedGreen
+
+  # apply red component to the image with (or) without percentage
+  red-component image-name destination-image-name percentage (or) red-component image-name destination-image-name
+  eg: red-component redTingedOriginal redTingedRed 50 (or) red-component redTingedOriginal redTingedRed
+
+  # apply green component to the image with (or) without percentage
+  green-component image-name destination-image-name percentage (or) green-component image-name destination-image-name
+  eg: green-component redTingedOriginal redTingedGreen 50 (or) green-component redTingedOriginal redTingedGreen
+
+  # apply blue component to the image with (or) without percentage
+  blue-component image-name destination-image-name percentage (or) blue-component image-name destination-image-name
+  eg: blue-component redTingedOriginal redTingedBlue 50 (or) blue-component redTingedOriginal redTingedBlue
+
+  # calculate value component of the image with (or) without percentage
+  value-component image-name destination-image-name percentage (or) value-component image-name destination-image-name
+  eg: value-component redTingedOriginal redTingedValue 50 (or) value-component redTingedOriginal redTingedValue
+
+  # calculate luma component of the image with (or) without percentage
+  luma-component image-name destination-image-name percentage (or) luma-component image-name destination-image-name
+  eg: luma-component redTingedOriginal redTingedLuma 50 (or) luma-component redTingedOriginal redTingedLuma
+
+  # calculate intensity component of the image with (or) without percentage
+  intensity-component image-name destination-image-name percentage (or) intensity-component image-name destination-image-name
+  eg: intensity-component redTingedOriginal redTingedIntensity 50 (or) intensity-component redTingedOriginal redTingedIntensity
+
+  # flip image horizontally
+  horizontal-flip image-name destination-image-name
+  eg: horizontal-flip redTingedOriginal redTingedHorizontalFlipped
+
+  # flip image vertically
+  vertical-flip image-name destination-image-name
+  eg: vertical-flip redTingedOriginal redTingedVerticalFlipped
+
+  # brighten the image
+  brighten value image-name destination-image-name
+  eg: brighten 100 redTingedOriginal redTingedBrightened
+
+  # split image into RGB channels
+  rgb-split image-name red-destination green-destination blue-destination
+  eg: rgb-split redTingedOriginal redTingedSplitRed redTingedSplitGreen redTingedSplitBlue
+
+  # combine RGB channels into an image
+  rgb-combine destination-image red-image green-image blue-image
+  eg: rgb-combine redTingedCombined redTingedSplitRed redTingedSplitGreen redTingedSplitBlue
+
+  # blur the image with (or) without percentage
+  blur image-name destination-image-name percentage (or) image-name destination-image-name
+  eg: blur redTingedOriginal redTingedBlurred 50 (or) blur redTingedOriginal redTingedBlurred
+
+  # sharpen the image with (or) without percentage
+  sharpen image-name destination-image-name percentage (or) sharpen image-name destination-image-name
+  eg: sharpen redTingedOriginal redTingedSharpened 50 (or) sharpen redTingedOriginal redTingedSharpened
+
+  # compress the image
+  compress percentage image-name dest-image-name
+  eg: compress 90 redTingedOriginal redTingedCompressed
+
+  # apply sepia tone to the image with (or) without percentage
+  sepia image-name destination-image-name percentage (or) sepia image-name destination-image-name
+  eg: sepia redTingedOriginal redTingedSepia 50 (or) sepia redTingedOriginal redTingedSepia
+
+  # generate and store histogram of the image
+  histogram image-name destination-image-name
+  eg: histogram redTingedOriginal redTingedHistogram
+
+  # apply color correction to the image with (or) without percentage
+  color-correct image-name destination-image-name percentage (or) color-correct image-name destination-image-name
+  eg: color-correct redTingedOriginal redTingedColorCorrected 50 (or) color-correct redTingedOriginal redTingedColorCorrected
+
+  # adjust levels of the image with (or) without percentage
+  levels-adjust black-point mid-point white-point image-name destination-image-name percentage (or) levels-adjust black-point mid-point white-point image-name destination-image-name
+  eg: levels-adjust 20 128 235 redTingedOriginal redTingedLevelsAdjusted 50 (or) levels-adjust 20 128 235 redTingedOriginal redTingedLevelsAdjusted
