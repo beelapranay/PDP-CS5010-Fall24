@@ -1,0 +1,25 @@
+# Load two images
+load resources/sampleImages/statue-of-unity.jpg manhattan
+load resources/sampleImages/losless.png random
+
+# Apply sepia to both images
+sepia manhattan manhattan-sepia
+sepia random random-sepia
+
+# Save both sepia images
+save resources/manhattan-sepia.png manhattan-sepia
+save resources/random-sepia.jpg random-sepia
+
+# Extract red component from manhattan image
+red-component manhattan manhattan-red
+save resources/manhattan-red.png manhattan-red
+
+# Extract blue component from random image
+blue-component random random-blue
+save resources/random-blue.jpg random-blue
+
+# Combine red component of manhattan with blue component of random and green component of manhattan
+rgb-combine combined-image manhattan-red manhattan manhattan-red
+
+# Save the combined image
+save resources/combined-image.png combined-image

@@ -1,0 +1,3 @@
+load res/Archive/jpgRes/earthLA.jpg ear
+blur ear earbr split 50
+save res/Archive/jpgRes/earbr.jpg earbr

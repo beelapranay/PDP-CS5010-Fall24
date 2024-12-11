@@ -1,0 +1,77 @@
+#load an image
+load testImages/jpg/earth.jpg earth
+
+#apply red component to the image with (or) without percentage
+red-component earth earthRed split 50
+save res/earthRed.jpg earthRed
+
+#apply green component to the image with (or) without percentage
+green-component earth earthGreen split 50
+save res/earthGreen.jpg earthGreen
+
+#apply blue component to the image with (or) without percentage
+blue-component earth earthBlue split 50
+save res/earthBlue.jpg earthBlue
+
+#calculate value component of the image with (or) without percentage
+value-component earth earthValue split 50
+save res/earthValue.jpg earthValue
+
+#calculate luma component of the image with (or) without percentage
+luma-component earth earthLuma split 50
+save res/earthLuma.jpg earthLuma
+
+#calculate intensity component of the image with (or) without percentage
+intensity-component earth earthIntensity split 50
+save res/earthIntensity.jpg earthIntensity
+
+#flip image horizontally
+horizontal-flip earth earth-h
+save res/earth-h.jpg earth-h
+
+#flip image vertically
+vertical-flip earth earth-v
+save res/earth-v.jpg earth-v
+
+#brighten the image
+brighten 100 earthRed earthRedBrightened
+save res/earthRedBrightened.jpg earthRedBrightened
+
+#split image into RGB channels
+rgb-split earth red-earth green-earth blue-earth
+
+#combine RGB channels into an image
+rgb-combine earth-combine red-earth green-earth blue-earth
+save res/earthCombinedChannels.jpg earth-combine
+
+#blur the image with (or) without percentage
+blur earth earthBlur
+save res/earthBlur.jpg earthBlur
+
+#sharpen the image with (or) without percentage
+sharpen earth earthSharpen
+save res/earthSharpen.jpg earthSharpen
+
+#compress the image
+compress 95 earth earthCompressed
+save res/earthCompressed.jpg earthCompressed
+
+#apply sepia tone to the image with (or) without percentage
+sepia earth earthSepia split 50
+save res/earthSepia.jpg earthSepia
+
+#generate and store histogram of the image
+histogram earth earthHistogram
+save res/earthHistogram.jpg earthHistogram
+
+#apply color correction to the image with (or) without percentage
+color-correct earth earthColorCorrected
+save res/earthColorCorrected.jpg earthColorCorrected
+
+#adjust levels of the image with (or) without percentage
+levels-adjust 20 128 235 earth earthLevelsAdjusted split 50
+save res/earthLevelsAdjusted.jpg earthLevelsAdjusted
+
+#downscale the image
+downscale 100 100 earth earth-downscaled
+save res/earth-downscaled.jpg earth-downscaled

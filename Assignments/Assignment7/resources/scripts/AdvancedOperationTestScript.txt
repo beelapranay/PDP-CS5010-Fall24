@@ -1,0 +1,22 @@
+# Load an image and name it 'sample-image'
+load resources/sampleImages/statue-of-unity.jpg sample-image
+
+# Apply 90% compression
+compress 90 sample-image sample-compressed
+save resources/sample-compressed.jpg sample-compressed
+
+# Color correct the image
+color-correct sample-image sample-color-corrected
+save resources/sample-color-corrected.jpg sample-color-corrected
+
+# Adjust levels of the image
+levels-adjust 30 128 220 sample-image sample-levels-adjusted
+save resources/sample-levels-adjusted.jpg sample-levels-adjusted
+
+# Generate a histogram for the image
+histogram sample-image sample-histogram
+save resources/sample-histogram.jpg sample-histogram
+
+# Apply a split view with blur
+blur sample-image sample-blurred split 50
+save resources/sample-final-split-view.jpg sample-blurred

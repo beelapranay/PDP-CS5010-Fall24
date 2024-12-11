@@ -1,0 +1,5 @@
+# Apply blur to the image
+blur manhattan manhattan-blur
+
+# Run the second script
+run resources/scripts/second_nested_script.txt

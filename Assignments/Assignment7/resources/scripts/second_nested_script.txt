@@ -1,0 +1,5 @@
+# Apply sepia to the blurred image
+sepia manhattan-blur manhattan-blur-sepia
+
+# Save the final image
+save resources/manhattan-blur-sepia-nested.png manhattan-blur-sepia

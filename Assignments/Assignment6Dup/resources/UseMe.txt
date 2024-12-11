@@ -1,0 +1,150 @@
+HOW TO RUN THE PROGRAM:
+	1. Launch the Program in GUI Mode:
+       a. Run the program without any arguments.
+       b. Command: java -jar Program.jar
+       c. This will launch the graphical user interface (GUI) for interacting with the program.
+
+    2. Run the Program with a Script File:
+       a. Prepare a script file with commands in the expected format (e.g., load, blur, save).
+       b. Run the program with the -file option followed by the script file path.
+       c. Command: java -jar Program.jar -file <path_to_script_file>
+       d. Example: java -jar Program.jar -file script.txt
+
+    3. Launch the Program in Text-Based Interactive Mode:
+       a. Run the program with the -text option.
+       b. Command: java -jar Program.jar -text
+       c. Enter commands interactively in the console, and type exit to terminate the program.
+
+COMMANDS SUPPORTED:
+  # load an image
+  load image-destination image-name
+  eg: load src/testImages/png/red_tinged_image.png redTingedOriginal
+
+  # save an image
+  save image-destination image-name
+  eg: save src/testImages/png/red_tinged_green.png redTingedGreen
+
+  # apply red component to the image with (or) without percentage
+  red-component image-name destination-image-name percentage (or) red-component image-name destination-image-name
+  eg: red-component redTingedOriginal redTingedRed 50 (or) red-component redTingedOriginal redTingedRed
+
+  # apply green component to the image with (or) without percentage
+  green-component image-name destination-image-name percentage (or) green-component image-name destination-image-name
+  eg: green-component redTingedOriginal redTingedGreen 50 (or) green-component redTingedOriginal redTingedGreen
+
+  # apply blue component to the image with (or) without percentage
+  blue-component image-name destination-image-name percentage (or) blue-component image-name destination-image-name
+  eg: blue-component redTingedOriginal redTingedBlue 50 (or) blue-component redTingedOriginal redTingedBlue
+
+  # calculate value component of the image with (or) without percentage
+  value-component image-name destination-image-name percentage (or) value-component image-name destination-image-name
+  eg: value-component redTingedOriginal redTingedValue 50 (or) value-component redTingedOriginal redTingedValue
+
+  # calculate luma component of the image with (or) without percentage
+  luma-component image-name destination-image-name percentage (or) luma-component image-name destination-image-name
+  eg: luma-component redTingedOriginal redTingedLuma 50 (or) luma-component redTingedOriginal redTingedLuma
+
+  # calculate intensity component of the image with (or) without percentage
+  intensity-component image-name destination-image-name percentage (or) intensity-component image-name destination-image-name
+  eg: intensity-component redTingedOriginal redTingedIntensity 50 (or) intensity-component redTingedOriginal redTingedIntensity
+
+  # flip image horizontally
+  horizontal-flip image-name destination-image-name
+  eg: horizontal-flip redTingedOriginal redTingedHorizontalFlipped
+
+  # flip image vertically
+  vertical-flip image-name destination-image-name
+  eg: vertical-flip redTingedOriginal redTingedVerticalFlipped
+
+  # brighten the image
+  brighten value image-name destination-image-name
+  eg: brighten 100 redTingedOriginal redTingedBrightened
+
+  # split image into RGB channels
+  rgb-split image-name red-destination green-destination blue-destination
+  eg: rgb-split redTingedOriginal redTingedSplitRed redTingedSplitGreen redTingedSplitBlue
+
+  # combine RGB channels into an image
+  rgb-combine destination-image red-image green-image blue-image
+  eg: rgb-combine redTingedCombined redTingedSplitRed redTingedSplitGreen redTingedSplitBlue
+
+  # blur the image with (or) without percentage
+  blur image-name destination-image-name percentage (or) image-name destination-image-name
+  eg: blur redTingedOriginal redTingedBlurred 50 (or) blur redTingedOriginal redTingedBlurred
+
+  # sharpen the image with (or) without percentage
+  sharpen image-name destination-image-name percentage (or) sharpen image-name destination-image-name
+  eg: sharpen redTingedOriginal redTingedSharpened 50 (or) sharpen redTingedOriginal redTingedSharpened
+
+  # compress the image
+  compress percentage image-name dest-image-name
+  eg: compress 90 redTingedOriginal redTingedCompressed
+
+  # apply sepia tone to the image with (or) without percentage
+  sepia image-name destination-image-name percentage (or) sepia image-name destination-image-name
+  eg: sepia redTingedOriginal redTingedSepia 50 (or) sepia redTingedOriginal redTingedSepia
+
+  # generate and store histogram of the image
+  histogram image-name destination-image-name
+  eg: histogram redTingedOriginal redTingedHistogram
+
+  # apply color correction to the image with (or) without percentage
+  color-correct image-name destination-image-name percentage (or) color-correct image-name destination-image-name
+  eg: color-correct redTingedOriginal redTingedColorCorrected 50 (or) color-correct redTingedOriginal redTingedColorCorrected
+
+  # adjust levels of the image with (or) without percentage
+  levels-adjust black-point mid-point white-point image-name destination-image-name percentage (or) levels-adjust black-point mid-point white-point image-name destination-image-name
+  eg: levels-adjust 20 128 235 redTingedOriginal redTingedLevelsAdjusted 50 (or) levels-adjust 20 128 235 redTingedOriginal redTingedLevelsAdjusted
+
+GUI Operations:
+  For operations which support split view/preview, the user will be prompted to enter a value and clicking on "yes" will apply a split of that operation on the image,
+  else the operation will be applied on the whole image.
+
+  # load an image
+  Click on the "Load Image" button to load an image, the program supports 3 image formats (jpg, png, and ppm). The buttons of the other operations in the GUI will only
+  appear after loading an image.
+
+  # convert to sepia
+  "Convert to Sepia" button can be used to convert the image into sepia. (supports split preview)
+
+  # horizontal flip
+  "Horizontal Flip" button can be used to flip the image horizontally.
+
+  # vertical flip
+  "Vertical Flip" button can be used to flip the image vertically.
+
+  # blur
+  "Blur" button can be used to blur the image. (supports split preview)
+
+  # sharpen
+  "Sharpen" button can be used to sharpen the image. (supports split preview)
+
+  # grayscale
+  "Grayscale" button can be used to convert the image to grayscale. (supports split preview)
+
+  # rgb-split
+  "RGB Split" button can be used to split the image channels. Clicking on this button will add the "Red Image", "Green Image", and "Blue Image"
+  buttons to the GUI panel. When a new operation is applied, clicking on these buttons will throw an error so the user has to click on the RGB Split
+  button again to apply the RGB Split on the new image.
+
+  # compress
+  "Compress" button can be used to compress an image. Clicking on this button will ask the user to input a compression percentage, which will compress the image.
+  The program will throw an error if the compression percentage is not in the required range.
+
+  # color-correct
+  "Color Correct" button can be used color correct an image. Clicking on this button will color correct an image.
+
+  # levels-adjustment
+  "Levels Adjust" button can be used to adjust the levels in an image. Clicking on this button will prompt the user
+  to enter the values of b, m, and w. The program will go ahead and apply the levels adjust with the default value
+  if the values of b, m, and w are not within range and will throw an error if the values of b, m, w are not in ascending order.
+
+  # downscale-image
+  "Downscale Image" button can be used to resize the image. Clicking on this button will prompt the user to enter values of the
+  new height and width, and if the values are valid. The image will get downscaled accordingly.
+
+  # save image
+  "Save Image" can be used to save an image to the desired directory.
+
+
+

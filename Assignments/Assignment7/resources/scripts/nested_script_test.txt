@@ -1,0 +1,5 @@
+# Load the image manhattan-small.png
+load resources/sampleImages/statue-of-unity.jpg manhattan
+
+# Run the first script
+run resources/scripts/first_nested_script.txt

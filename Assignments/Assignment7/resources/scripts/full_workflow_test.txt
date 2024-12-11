@@ -1,0 +1,29 @@
+# Load the image random.jpg and name it 'random'
+load resources/sampleImages/statue-of-unity.jpg random
+
+# Display image details
+details random
+
+# Apply sharpen to the image
+sharpen random random-sharpened
+
+# Save the sharpened image
+save resources/random-sharpened.jpg random-sharpened
+
+# Extract luma component from the sharpened image
+luma-component random-sharpened random-luma
+
+# Save the luma component image
+save resources/random-luma.jpg random-luma
+
+# Split the luma image into RGB components (should be identical since it's grayscale)
+rgb-split random-luma luma-red luma-green luma-blue
+
+# Brighten the blue component by 20
+brighten 20 luma-blue luma-blue-bright
+
+# Combine the red and green components with the brightened blue component
+rgb-combine random-luma-tinted luma-red luma-green luma-blue-bright
+
+# Save the tinted luma image
+save resources/random-luma-tinted.jpg random-luma-tinted

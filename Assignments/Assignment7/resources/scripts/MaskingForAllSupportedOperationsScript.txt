@@ -1,0 +1,64 @@
+# Loading both sample image and mask
+load resources/sampleImages/statue-of-unity.jpg sample-image
+load resources/operatedImages/mask.png mask
+
+# Applying the mask to the image for all supported operations
+
+blur sample-image blur-image
+blur sample-image mask masked-blur-image
+
+sharpen sample-image sharpen-image
+sharpen sample-image mask masked-sharpen-image
+
+sepia sample-image sepia-image
+sepia sample-image mask masked-sepia-image
+
+red-component sample-image red-component-image
+red-component sample-image mask masked-red-component-image
+
+green-component sample-image green-component-image
+green-component sample-image mask masked-green-component-image
+
+blue-component sample-image blue-component-image
+blue-component sample-image mask masked-blue-component-image
+
+luma-component sample-image luma-component-image
+luma-component sample-image mask masked-luma-component-image
+
+intensity-component sample-image intensity-component-image
+intensity-component sample-image mask masked-intensity-component-image
+
+value-component sample-image value-component-image
+value-component sample-image mask masked-value-component-image
+
+
+# Saving both the operated images along with their masked images
+save resources/operatedImages/blur-image.jpg blur-image
+save resources/operatedImages/masked-blur-image.jpg masked-blur-image
+
+save resources/operatedImages/sharpen-image.jpg sharpen-image
+save resources/operatedImages/masked-sharpen-image.jpg masked-sharpen-image
+
+save resources/operatedImages/sepia-image.jpg sepia-image
+save resources/operatedImages/masked-sepia-image.jpg masked-sepia-image
+
+save resources/operatedImages/red-component-image.jpg red-component-image
+save resources/operatedImages/masked-red-component-image.jpg masked-red-component-image
+
+save resources/operatedImages/green-component-image.jpg green-component-image
+save resources/operatedImages/masked-green-component-image.jpg masked-green-component-image
+
+save resources/operatedImages/blue-component-image.jpg blue-component-image
+save resources/operatedImages/masked-blue-component-image.jpg masked-blue-component-image
+
+save resources/operatedImages/luma-component-image.jpg luma-component-image
+save resources/operatedImages/masked-luma-component-image.jpg masked-luma-component-image
+
+save resources/operatedImages/intensity-component-image.jpg intensity-component-image
+save resources/operatedImages/masked-intensity-component-image.jpg masked-intensity-component-image
+
+save resources/operatedImages/value-component-image.jpg value-component-image
+save resources/operatedImages/masked-value-component-image.jpg masked-value-component-image
+
+# Exit application
+exit

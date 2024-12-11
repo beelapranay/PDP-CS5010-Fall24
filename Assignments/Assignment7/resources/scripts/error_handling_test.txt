@@ -1,0 +1,17 @@
+# Attempt to load a non-existent image
+load resources/sampleImages/nonexistent.png missing-image
+
+# Attempt to apply an operation on a non-loaded image
+blur missing-image blurred-missing-image
+
+# Load an image with incorrect path
+load wrongpath/random.jpg random
+
+# Use incorrect number of arguments
+brighten random
+
+# Use an unknown command
+rotate random random-rotated
+
+# Attempt to save an image that doesn't exist
+save resources/does-not-exist.jpg nonexistent-image

@@ -1,0 +1,30 @@
+# Load the image random.jpg and name it 'random'
+load resources/sampleImages/statue-of-unity.jpg random
+
+# Extract the red component and save it
+red-component random random-red
+save resources/random-red.jpg random-red
+
+# Extract the green component and save it
+green-component random random-green
+save resources/random-green.jpg random-green
+
+# Extract the blue component and save it
+blue-component random random-blue
+save resources/random-blue.jpg random-blue
+
+# Extract the value component and save it
+value-component random random-value
+save resources/random-value.jpg random-value
+
+# Extract the luma component and save it
+luma-component random random-luma
+save resources/random-luma.jpg random-luma
+
+# Extract the intensity component and save it
+intensity-component random random-intensity
+save resources/random-intensity.jpg random-intensity
+
+# Apply sepia tone to the image and save it
+sepia random random-sepia
+save resources/random-sepia.jpg random-sepia

@@ -1,0 +1,18 @@
+# Load the image manhattan-small.png and name it 'manhattan'
+load resources/sampleImages/statue-of-unity.jpg manhattan
+
+# Apply blur to the image
+blur manhattan manhattan-blur
+save resources/manhattan-blur.png manhattan-blur
+
+# Apply sharpen to the image
+sharpen manhattan manhattan-sharpen
+save resources/manhattan-sharpen.png manhattan-sharpen
+
+# Brighten the blurred image by 30
+brighten 30 manhattan-blur manhattan-blur-bright
+save resources/manhattan-blur-bright.png manhattan-blur-bright
+
+# Flip the sharpened image horizontally
+horizontal-flip manhattan-sharpen manhattan-sharpen-flipped
+save resources/manhattan-sharpen-flipped.png manhattan-sharpen-flipped

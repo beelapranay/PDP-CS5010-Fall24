@@ -1,0 +1,59 @@
+  # load an image
+  load resources/testImages/jpg/unnamed.jpg earth
+
+  # save an image
+  save resources/res/jpgRes/earth.jpg earth
+
+  # apply red component to the image with (or) without percentage
+  red-component earth earthRed 50
+
+  # apply green component to the image with (or) without percentage
+  green-component earth earthGreen 50
+
+  # apply blue component to the image with (or) without percentage
+  blue-component earth earthBlue 50
+
+  # calculate value component of the image with (or) without percentage
+  value-component earth earthValue 50
+
+  # calculate luma component of the image with (or) without percentage
+  luma-component earth earthLuma 50
+
+  # calculate intensity component of the image with (or) without percentage
+  intensity-component earth earthIntensity 50
+
+  # flip image horizontally
+  horizontal-flip earth earth-h
+
+  # flip image vertically
+  vertical-flip earth earth-v
+
+  # brighten the image
+  brighten 100 earthRed earthRedBrightened
+
+  # split image into RGB channels
+  rgb-split earth red-earth green-earth blue-earth
+
+  # combine RGB channels into an image
+  rgb-combine earth-combine red-earth green-earth blue-earth
+
+  # blur the image with (or) without percentage
+  blur earth earthBlur 50
+
+  # sharpen the image with (or) without percentage
+  sharpen earth earthSharpen 50
+
+  # compress the image
+  compress 95 earth earthCompressed
+
+  # apply sepia tone to the image with (or) without percentage
+  sepia earth earthSepia 50
+
+  # generate and store histogram of the image
+  histogram earth earthHistogram
+
+  # apply color correction to the image with (or) without percentage
+  color-correct earth earthColorCorrected 50
+
+  # adjust levels of the image with (or) without percentage
+  levels-adjust 20 128 235 earth earthLevelsAdjusted 50

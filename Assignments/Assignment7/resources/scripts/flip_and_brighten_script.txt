@@ -1,0 +1,8 @@
+# Flip the image vertically
+vertical-flip manhattan manhattan-flipped
+
+# Brighten the flipped image by 40
+brighten 40 manhattan-flipped manhattan-flipped-bright
+
+# Save the flipped and brightened image
+save resources/manhattan-flipped-bright.png manhattan-flipped-bright

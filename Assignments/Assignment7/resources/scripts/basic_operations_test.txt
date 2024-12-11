@@ -1,0 +1,23 @@
+# Load the image manhattan-small.png and name it 'manhattan'
+load resources/sampleImages/statue-of-unity.jpg manhattan
+
+# Display details of the loaded image
+details manhattan
+
+# Brighten the image by increasing brightness by 20
+brighten 20 manhattan manhattan-bright
+
+# Save the brightened image
+save resources/manhattan-bright.png manhattan-bright
+
+# Flip the original image vertically
+vertical-flip manhattan manhattan-vertical
+
+# Save the vertically flipped image
+save resources/manhattan-vertical.png manhattan-vertical
+
+# Flip the vertical image horizontally to get a rotated effect
+horizontal-flip manhattan-vertical manhattan-rotated
+
+# Save the rotated image
+save resources/manhattan-rotated.png manhattan-rotated

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Assignment6Dup:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Assignment6Dup_jar</output-path>
+    <root id="archive" name="Assignment6Dup.jar">
+      <element id="module-output" name="Assignment6Dup" />
+    </root>
+  </artifact>
+</component>

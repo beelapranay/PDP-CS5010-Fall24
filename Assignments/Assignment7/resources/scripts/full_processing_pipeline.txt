@@ -1,0 +1,23 @@
+# Load the image random.jpg and name it 'random'
+load resources/sampleImages/statue-of-unity.jpg random
+
+# Apply blur
+blur random random-blur
+
+# Apply sharpen to the blurred image to enhance edges
+sharpen random-blur random-blur-sharpened
+
+# Convert to grayscale using intensity component
+intensity-component random-blur-sharpened random-grayscale
+
+# Apply sepia tone to the grayscale image
+sepia random-grayscale random-sepia
+
+# Brighten the sepia-toned image by 25
+brighten 25 random-sepia random-sepia-bright
+
+# Flip the brightened image horizontally
+horizontal-flip random-sepia-bright random-sepia-bright-flipped
+
+# Save the final processed image
+save resources/random-final.jpg random-sepia-bright-flipped

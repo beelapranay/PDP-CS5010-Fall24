@@ -1,0 +1,15 @@
+# Load the image manhattan-small.png and name it 'manhattan'
+load resources/sampleImages/statue-of-unity.jpg manhattan
+
+# Apply blur to the image
+blur manhattan manhattan-blur
+
+# Apply sepia to the blurred image
+sepia manhattan-blur manhattan-blur-sepia
+
+# Save the sepia-toned blurred image
+save resources/manhattan-blur-sepia.png manhattan-blur-sepia
+
+# Create a script to flip and brighten the image
+# Save this part as 'flip_and_brighten_script.txt'
+run resources/scripts/flip_and_brighten_script.txt

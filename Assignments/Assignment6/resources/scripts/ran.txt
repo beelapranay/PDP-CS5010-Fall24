@@ -1,0 +1,4 @@
+# load an image
+load testImages/jpg/earth.jpg earth
+downscale earth output 200 200
+save res/output.jpg output

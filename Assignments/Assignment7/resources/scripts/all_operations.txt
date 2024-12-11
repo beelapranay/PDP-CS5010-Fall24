@@ -1,0 +1,55 @@
+# Load an image named original
+load resources/sampleImages/statue-of-unity.jpg original
+
+# Save the loaded image
+save resources/original_image_saved.jpg original
+
+# Display details of the original image
+details original
+
+# Step 1: Brighten the image by 30 units and save it
+brighten 60 original brightened_image
+save resources/brightened_image.jpg brightened_image
+
+# Step 2: Apply sepia transformation to the brightened image and save it
+sepia original sepia_image
+save resources/sepia_image.jpg sepia_image
+
+# Step 3: Apply sharpening on the sepia image and save it
+sharpen original sharpened_image
+save resources/sharpened_image.jpg sharpened_image
+
+# Step 4: Flip the sharpened image horizontally and save it
+horizontal-flip original horizontal_flipped_image
+save resources/horizontal_flipped_image.jpg horizontal_flipped_image
+
+# Step 5: Flip the horizontally flipped image vertically and save it
+vertical-flip original vertical_flipped_image
+save resources/vertical_flipped_image.jpg vertical_flipped_image
+
+# Step 6: Blur the vertically flipped image and save it
+blur original blurred_image
+save resources/blurred_image.jpg blurred_image
+
+# Step 7: Split the blurred image into RGB components
+rgb-split original red_component green_component blue_component
+
+# Save the split RGB components
+save resources/red_component.jpg red_component
+save resources/green_component.jpg green_component
+save resources/blue_component.jpg blue_component
+
+# Step 8: Combine the RGB components back into a single image and save it
+rgb-combine combined_image red_component green_component blue_component
+save resources/combined_image.jpg combined_image
+
+
+# Step 9: Storing all image components
+luma-component original luma_component
+save resources/luma_component.jpg luma_component
+
+value-component original value_component
+save resources/value_component.jpg value_component
+
+intensity-component original intensity_component
+save resources/intensity_component.jpg intensity_component
